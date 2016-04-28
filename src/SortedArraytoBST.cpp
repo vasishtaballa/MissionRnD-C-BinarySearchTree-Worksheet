@@ -33,9 +33,25 @@ struct node{
 	struct node *right;
 };
 
+node * build_tree(int *arr, int start_index, int end_index)
+{
+	if (start_index <= end_index)
+	{
+		struct node *tree = (struct node *)malloc(sizeof(node));
+		int mid = (start_index + end_index) / 2;
+		tree->data = arr[mid];
+		tree->left = build_tree(arr, start_index, mid - 1);
+		tree->left = build_tree(arr, mid + 1, end_index);
+		return tree;
+	}
+}
 
-struct node * convert_array_to_bst(int *arr, int len){
-	
-	return NULL;
+struct node * convert_array_to_bst(int *arr, int len)
+{
+	if (arr == NULL)
+	{
+		return NULL;
+	}
+	return build_tree(arr, 0, len - 1);
 }
 
